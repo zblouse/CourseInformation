@@ -1,6 +1,9 @@
 package com.example.coursedescriptions;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -28,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
         CourseListAdapter courseListAdapter = new CourseListAdapter(MainActivity.this, courseList);
         ListView courseListView = findViewById(R.id.courseList);
         courseListView.setAdapter(courseListAdapter);
+        courseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Course selectedCourse = (Course) adapterView.getItemAtPosition(position);
+                Intent intent = new Intent(MainActivity.this,CourseInfoActivity.class);
+                intent.putExtra("selectedCourse", selectedCourse);
+                startActivity(intent);
+            }
+        });
 
     }
 

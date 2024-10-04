@@ -1,11 +1,12 @@
 package com.example.coursedescriptions;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * POJO for information on each Course
  */
-public class Course {
+public class Course implements Serializable {
 
     private final String courseCode;
     private final String courseName;
