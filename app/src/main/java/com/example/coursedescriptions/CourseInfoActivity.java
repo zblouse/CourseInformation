@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Activity for displaying all information about the selected course
+ */
 public class CourseInfoActivity extends AppCompatActivity {
 
     @Override
@@ -29,6 +32,10 @@ public class CourseInfoActivity extends AppCompatActivity {
         TextView courseDescriptionTextView = findViewById(R.id.description);
         courseDescriptionTextView.setText(course.getCourseDescription());
 
+        /*
+        This button returns the user to the MainActivity and inludes a ToastMessageExtra in the
+        intent. The message will be displayed as a Toast to the user when the MainActivity loads.
+         */
         Button button = findViewById(R.id.backButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

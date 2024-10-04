@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter for the array of courses that will be displayed in the ListView
+ */
 public class CourseListAdapter extends ArrayAdapter<Course> {
 
     public CourseListAdapter(Context context, ArrayList<Course> courseList){

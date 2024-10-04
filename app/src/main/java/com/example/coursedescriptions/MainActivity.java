@@ -21,6 +21,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
+/**
+ * MainActivity is the initial screen displayed when the user launches the application. It displays
+ * the list of classes. Whenever this class is loaded from an intent with a ToastMessageExtra, it
+ * displays the Toast.
+ */
 public class MainActivity extends AppCompatActivity {
     Context mainContext = this;
 
@@ -35,17 +40,19 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        //Check for toast message extra
+        //Check for toast message extra. If one is present, display the toast to the user.
         ToastMessageExtra toastMessageExtra = getIntent().getSerializableExtra("toastMessageExtra", ToastMessageExtra.class);
         if(toastMessageExtra != null){
             Toast toastMessage = Toast.makeText(mainContext, toastMessageExtra.getToastMessage(), Toast.LENGTH_SHORT);
             toastMessage.show();
         }
 
+        //Display the list of Courses as an Item List
         ArrayList<Course> courseList = generateCourses();
         CourseListAdapter courseListAdapter = new CourseListAdapter(MainActivity.this, courseList);
         ListView courseListView = findViewById(R.id.courseList);
         courseListView.setAdapter(courseListAdapter);
+        //When an item in the list is clicked, it will use an Intent to load the CourseInfoActivity
         courseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -55,11 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
-
-
+    /**
+     * Generate the list of courses.
+     * @return ArrayList of courses.
+     */
     private ArrayList<Course> generateCourses(){
         ArrayList<Course> courseList = new ArrayList<>();
         courseList.add(new Course("SWENG-581","Software Testing", "This course provides a rigorous formal framework and practical information on the testing of software throughout its life cycle.",3));
