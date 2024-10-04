@@ -1,12 +1,19 @@
 package com.example.coursedescriptions;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.ActivityResult;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -15,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    Context mainContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //Check for toast message extra
+        ToastMessageExtra toastMessageExtra = getIntent().getSerializableExtra("toastMessageExtra", ToastMessageExtra.class);
+        if(toastMessageExtra != null){
+            Toast toastMessage = Toast.makeText(mainContext, toastMessageExtra.getToastMessage(), Toast.LENGTH_SHORT);
+            toastMessage.show();
+        }
 
         ArrayList<Course> courseList = generateCourses();
         CourseListAdapter courseListAdapter = new CourseListAdapter(MainActivity.this, courseList);
@@ -42,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     private ArrayList<Course> generateCourses(){
         ArrayList<Course> courseList = new ArrayList<>();
