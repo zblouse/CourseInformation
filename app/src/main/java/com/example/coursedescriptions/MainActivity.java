@@ -19,6 +19,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 
 /**
@@ -40,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        //Check for toast message extra. If one is present, display the toast to the user.
+        //Check for toast message extra. If one is present, display a snackbar to the user.
         ToastMessageExtra toastMessageExtra = getIntent().getSerializableExtra("toastMessageExtra", ToastMessageExtra.class);
         if(toastMessageExtra != null){
-            Toast toastMessage = Toast.makeText(mainContext, toastMessageExtra.getToastMessage(), Toast.LENGTH_SHORT);
-            toastMessage.show();
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.main),toastMessageExtra.getToastMessage(),Toast.LENGTH_SHORT);
+            snackbar.show();
         }
 
         //Display the list of Courses as an Item List
